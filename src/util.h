@@ -1,3 +1,9 @@
+/**
+@author : Swati Singhal ( University of Maryland )
+@contact : swati@cs.umd.edu
+
+**/
+
 #ifndef ADAPTIVE_UTIL_H
 
 #define ADAPTIVE_UTIL_H

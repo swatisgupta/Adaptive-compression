@@ -1,3 +1,9 @@
+/**
+@author : Swati Singhal ( University of Maryland )
+@contact : swati@cs.umd.edu
+
+**/
+
 #ifndef ACOMP_H
 #define ACOMP_H
 

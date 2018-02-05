@@ -1,3 +1,10 @@
+/**
+@author : Swati Singhal ( University of Maryland )
+@contact : swati@cs.umd.edu
+
+**/
+
+
 #include <sys/time.h>
 #include <math.h>
 #include <limits.h>
