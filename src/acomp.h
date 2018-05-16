@@ -1,50 +1,30 @@
-/**
-@author : Swati Singhal ( University of Maryland )
-@contact : swati@cs.umd.edu
-
-**/
-
 #ifndef ACOMP_H
 #define ACOMP_H
 
+#include "acomp_types.h"
+
 #define DEFAULT_W_CS 0.0f
 #define DEFAULT_W_CR 1.0f
-#define DEFAULT_DELTA 1.00f
+#define DEFAULT_DELTA 100.00f
+#define IO_BANDWIDTH 2.7E-09
 
-int IS_REAL=1;
-
-enum { 
-	NAIVE_ZLIB = 0, 
-	NAIVE_LZO, 
-	NAIVE_BZIP,  
-	BYTE_ZLIB, 
-	BYTE_LZO,
-	BYTE_BZIP, 
-	BYTEXOR_ZLIB, 	
-	BYTEXOR_LZO, 
-	BYTEXOR_BZIP, 
-	ZLIB_N, 
-	LZO_N, 
-	BZIP_N  
-};
-
-int acomp_decompress(int t_size, int ndims, unsigned char* metadata, char* compressed_data, 
+int acomp_decompress(int ele_size, int ndims, unsigned char* metadata, char* compressed_data, 
 	                char* output_data, 
-	                unsigned int* dimLen, unsigned int* req_start, unsigned int* req_count );
+	                acomp_size_t* dimLen, acomp_size_t* subset_start, acomp_size_t * subset_count );
 
-unsigned int acomp_get_max_metadata_size();
+int acomp_get_max_metadata_size();
 
-unsigned int acomp_compress( char * varname, int ndims, unsigned int* spatial_dim_len, int t_size, int is_real, 
-	                unsigned int input_size, unsigned int spatial_size,  
+acomp_size_t acomp_compress( char * varname, int ndims, acomp_size_t* dim_len, int ele_size, int is_real, 
+	                acomp_size_t input_size_bytes, acomp_size_t n_elements,  
 	                char* output_buff,  char* input_buff, 
 	                unsigned char * metadata);
 
 
-void acomp_get_actual_size( unsigned char* metadata, unsigned int *uncompressed_size_meta );
+void acomp_get_actual_size( unsigned char* metadata, acomp_size_t *uncompressed_size_meta );
 
-void acomps_conf(double w_cs, double w_cr, double delta);
+void acomp_conf(double w_cs, double w_cr, double delta);
 
-int acomp_get_nchunks(unsigned char* metadata, unsigned int** chunk_meta);
+int acomp_get_nchunks(unsigned char* metadata, acomp_size_t** chunk_meta);
 
 unsigned char acomp_get_byteflags(unsigned char* metadata);
 

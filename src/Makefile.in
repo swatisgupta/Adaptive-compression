@@ -131,7 +131,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libacomp_la_LIBADD =
-am_libacomp_la_OBJECTS = acomp.lo
+am_libacomp_la_OBJECTS = acomp.lo byte_analyzer.lo plot_gnuplot.lo \
+	compressor.lo preconditioners.lo chunking.lo
 libacomp_la_OBJECTS = $(am_libacomp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -323,15 +324,16 @@ BZIP = /homes/ssinghal/Builds
 LZO = /homes/ssinghal/Builds
 ACOMP_INCLUDES = -I${ZLIB}/include -I${BZIP}/include -I${LZO}/include
 ACOMP_LIBS = -lm ${ZLIB}/lib64 -lz ${BZIP}/lib -lbz ${LZO}/lib
-AM_CFLAGS = -g -Wall -fPIC ${ACOMP_INCLUDES}
+AM_CFLAGS = -Wall -fPIC ${ACOMP_INCLUDES}
 AM_LDFLAGS = ${ACOMP_LIBS}
 
 #bin_PROGRAMS = acomp 
 
-#acomp_SOURCES = acomp.c
+#acomp_SOURCES = acomp.c byte_analyzer.c
 #acomp_LDADD = ${LIBS}
 lib_LTLIBRARIES = libacomp.la
-libacomp_la_SOURCES = acomp.c 
+libacomp_la_SOURCES = acomp.c byte_analyzer.c plot_gnuplot.c \
+	compressor.c preconditioners.c chunking.c
 libacomp_la_LDFLAGS = -version-info 1:0:0
 all: all-am
 
@@ -412,6 +414,11 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/acomp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/byte_analyzer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chunking.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compressor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plot_gnuplot.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/preconditioners.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
